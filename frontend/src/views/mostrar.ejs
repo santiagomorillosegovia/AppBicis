@@ -1,0 +1,77 @@
+<%- include('partials/_header') %>
+
+<div class="container" id="app">
+    <div class="col-md-6">
+        
+        <table class ='table table-bordered table-hover'>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Color</th>
+                    <th>Modelo</th>
+                    <th>Ubicacion</th>
+                
+                </tr>
+
+
+            </thead>
+
+            <tbody>
+                
+                    <tr>
+                        <td>{{bicicletas.id}}</td>
+                        <td>{{bicicletas.color}}</td>
+                        <td>{{bicicletas.modelo}}</td>
+                        <td>{{bicicletas.latitud}} , {{bicicletas.longitud}} </td>
+
+                    
+                    </tr>
+                
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+
+<script>
+    
+    
+
+    var app = new Vue({
+
+        el: '#app',
+        data: {
+
+            bicicletas: []
+            
+        },
+
+
+
+        mounted: function(){
+
+            
+            const [_ , idBicicleta]  = (window.location.pathname.split('/mostrar/'));
+
+            var mkbicis= '<%= process.env.BICICLETAS_URL %>';
+
+            axios.get(`${mkbicis}/${idBicicleta}`)
+                .then(response => {
+                    this.bicicletas = response.data;
+                    console.log(response);
+                })
+                    .catch(error => {
+                    console.log(error);
+                });
+           
+
+        }
+
+        
+
+    })
+
+</script>
+
+<%- include('partials/_footer') %>

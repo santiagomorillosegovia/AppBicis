@@ -1,0 +1,134 @@
+<%- include('partials/_header') %>
+
+
+
+<div class="container" id="app">
+
+  
+    <div class="row">
+        <div class="col-md-5">
+
+            <h5 class="ml-4">Insertar Bicicleta</h5>
+
+            <div class="card">
+                <div class="card-body">
+                    <form action = "/add" method='POST'>
+
+                        <div class="form-group">
+    
+                            <input type ="text" name="id" placeholder="Insertar # de ID" class="form-control">   
+        
+                        </div>
+
+
+                        <div class="form-group">
+                        <br><label for="color">Color:  </label><select name="color" id="colorid" required input style="margin-left:5px"><option>-seleccionar-</option><option>Blanco</option><option>Negro</option><option>Rojo</option><option>Verde</option></select>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <br><label for="modelo">Modelo:  </label><select name="modelo" id="modeloid" required input style="margin-left:5px"><option>-seleccionar-</option><option>Ruta</option><option>Cross</option><option>Mountain</option><option>Turismo</option></select>
+                        </div>
+
+                        <div class="form-group mb-4">
+    
+                            <input type ="text" name="latitud" placeholder="Insertar Latitud" class="form-control">   
+        
+                        </div>
+
+                        <div class="form-group mb-4">
+    
+                            <input type ="text" name="longitud" placeholder="Insertar Longitud" class="form-control">   
+        
+                        </div>
+
+                        
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Guardar
+                        </button>
+                        
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-7">
+            <h5 class="ml-4">Bicicletas Disponibles</h5>
+            <table class ='table table-bordered table-hover mt-4'>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Color</th>
+                        <th>Modelo</th>
+                        <th>Ubicacion</th>
+                        <th>Operaciones</th>
+                       
+                    </tr>
+
+
+                </thead>
+                <tbody>
+                    
+                        <tr v-for= "bicicleta in bicicletas">
+                            <td>{{bicicleta.id}}</td>
+                            <td>{{bicicleta.color}}</td>
+                            <td>{{bicicleta.modelo}}</td>
+                            <td>{{bicicleta.latitud}} , {{bicicleta.longitud}} </td>
+
+                            <td>
+                                <a :href="`/mostrar/${bicicleta._id}`" class="btn btn-success">Mostrar</a>
+                                <a :href="`/eliminar/${bicicleta._id}`" class="btn btn-primary">Eliminar</a>
+                                <a :href="`/editar/${bicicleta._id}`" class="btn btn-primary">Editar</a>
+                            </td>
+                        </tr>
+                    
+                </tbody>
+
+            </table>
+        </div>
+
+
+    </div>
+</div>
+
+
+<script>
+
+   
+
+    var app = new Vue({
+
+        el: '#app',
+        data: {
+
+            bicicletas: []
+            
+        },
+
+        mounted: function(){
+
+            var mkbicis= '<%= process.env.BICICLETAS_URL %>';
+
+            axios.get(`${mkbicis}`)
+                .then(response => {
+                this.bicicletas = response.data;
+                console.log(user);
+                
+            })
+                .catch(error => {
+                console.log(error);
+            });
+
+
+        }
+
+        
+
+    })
+
+</script>
+
+
+
+<%- include('partials/_footer') %>

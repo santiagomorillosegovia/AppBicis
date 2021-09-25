@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mappingservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mappingservice
+  template:
+    metadata:
+      labels:
+        app: mappingservice
+    spec:
+      containers:
+      - name: mappingservice
+        image: samose96/mappingservice:v1
+        ports:
+        - name: http-server
+          containerPort: 3002
+
+        

@@ -1,0 +1,57 @@
+<%- include('partials/_header') %>
+
+
+
+<div class="col-md-5">
+    
+    <div class="card">
+        
+        <div class="card-body">
+
+            
+
+            <form :action = "`/edit/{id}`" method='POST'>
+
+                <div class="form-group">
+
+                    <label for="id">ID:</label> <input type ="text" name="id" placeholder="Insertar # de ID" class="form-control" >   
+
+                </div>
+
+
+                <div class="form-group">
+                <br><label for="color">Color:  </label><select name="color" id="colorid" required input style="margin-left:5px" ><option>-seleccionar-</option><option>Blanco</option><option>Negro</option><option>Rojo</option><option>Verde</option></select>
+                </div>
+
+                <div class="form-group mb-4">
+                    <br><label for="modelo">Modelo:  </label><select name="modelo" id="modeloid" required input style="margin-left:5px"><option>-seleccionar-</option><option>Ruta</option><option>Cross</option><option>Montian</option><option>Turismo</option></select>
+                </div>
+
+                <div class="form-group mb-4">
+
+                    <label for="id">Latitud:</label><input type ="text" name="latitud" placeholder="Insertar Latitud" class="form-control" >   
+
+                </div>
+
+                <div class="form-group mb-4">
+
+                    <label for="id">Longitud:</label> <input type ="text" name="longitud" placeholder="Insertar Longitud" class="form-control" >   
+
+                </div>
+
+                
+                <button type="submit" class="btn btn-primary btn-block">
+                    Actualizar
+                </button>
+                
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<%- include('partials/_footer') %>

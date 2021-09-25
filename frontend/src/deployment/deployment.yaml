@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+        version: "1.0"
+    spec:
+      containers:
+      - name: frontend
+        image: samose96/frontend:v1
+        env:
+        - name: SERVER_ROOT_URI
+          value: "http://169.57.110.17:32722/"
+        - name: BICICLETAS_URL
+          value: "http://169.57.110.17:31165/api/bicicletas"
+        - name: MARKERS_URL
+          value: "http://169.57.110.17:30827/api/markers"
+          
+          

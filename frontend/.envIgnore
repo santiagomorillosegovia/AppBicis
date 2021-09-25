@@ -1,0 +1,9 @@
+BICICLETAS_URL =http://localhost:3000/api/bicicletas
+
+MARKERS_URL= http://localhost:3002/api/markers
+
+GOOGLE_CLIENT_ID = 354126166092-p8lufbq4grp1o30lae1d7d24l76lo7ip.apps.googleusercontent.com
+
+SERVER_ROOT_URI = http://localhost:3001
+
+GOOGLE_CLIENT_SECRET = cjOC_2GKYrH-64BlKz5sxVir

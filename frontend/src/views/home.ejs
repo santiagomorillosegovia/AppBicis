@@ -1,0 +1,128 @@
+<%- include('partials/_header') %>
+
+
+ 
+
+<section class="py-3 border-bottom" id="features">
+    <div class="container px-1 my-2">
+        <div class="row gx-7">
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
+                <h2 class="h4 fw-bolder">Paseos</h2>
+                <p>Son paseos programados, donde podras compartir con amigos y hacer nuevos</p>
+                <a class="text-decoration-none" href="#!">
+                    Explorar
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-building"></i></div>
+                <h2 class="h4 fw-bolder">Rutas</h2>
+                <p>Los fines de semana haremos ruta con al menos 120 KM de recorrido. Animate!</p>
+                <a class="text-decoration-none" href="#!">
+                    Explorar
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+            <div class="col-lg-4">
+                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-toggles2"></i></div>
+                <h2 class="h4 fw-bolder">Competencias</h2>
+                <p>Las competencias nacionales son la cuspide, animate a ser un profesional en nuestro Club.</p>
+                <a class="text-decoration-none" href="#!">
+                    Explorar
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div class="container" id="map" style="position: relative; outline: none;" tabindex="0" >
+
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+
+
+
+
+    <script>
+
+        
+
+        var map=L.map('map').setView([6.16, -75.6],9);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+        maxZoom: 18, attribution:'<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+        }).addTo(map);
+
+
+
+    </script>
+                            
+         
+    
+
+        <!-- } -->
+
+</div>
+         
+
+<script>
+
+   
+
+    var app = new Vue({
+
+        el: '#app',
+        data: {
+
+            bicicletas: []
+            
+        },
+
+        mounted: function(){
+
+            var mkurl= '<%= process.env.MARKERS_URL %>';
+
+            axios.get(`${mkurl}`)
+                .then(response => {
+                const bicicletas = response.data;
+                console.log(bicicletas);
+                
+                
+               
+
+                for (var i = 0; i < bicicletas.length; i++){ 
+
+                    var marker = L.marker([bicicletas[i].latitud, bicicletas[i].longitud]).addTo(map);
+                    marker.bindPopup(`<b>ID: ${bicicletas[i].id}</b> - Bici de ${bicicletas[i].modelo} <br>Color ${bicicletas[i].color}`).openPopup();
+
+                 };
+
+                
+            })
+                .catch(error => {
+                console.log(error);
+            });
+
+
+        }
+
+        
+
+    })
+
+
+    
+
+</script>
+
+
+
+
+
+<%- include('partials/_footer') %>
+
