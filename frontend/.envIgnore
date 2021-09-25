@@ -7,3 +7,6 @@ GOOGLE_CLIENT_ID = 354126166092-p8lufbq4grp1o30lae1d7d24l76lo7ip.apps.googleuser
 SERVER_ROOT_URI = http://localhost:3001
 
 GOOGLE_CLIENT_SECRET = cjOC_2GKYrH-64BlKz5sxVir
+
+
+CHICHEN: TEST
